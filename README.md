@@ -1,96 +1,199 @@
-# Speech-to-emoji
-This is AI tool that recognize your word and gives emoji.
+# 🎤 Voice-to-Emoji for WhatsApp Web — Chrome Extension
+
+Say it. Feel it. Emoji it.
+🎙️➡️🧠➡️😄
+This Chrome extension turns your voice into expressive emojis — directly inside WhatsApp Web!
+
+## 🌟 What's Unique?
+
+Unlike standard messaging apps like WhatsApp, Telegram, or Instagram, which offer:
+
+- 🎤 Voice Notes
+- 📝 Speech-to-Text
+
+## 👷 We’re building the first-of-its-kind:
+
+👉 Speech-to-Emoji
+
+Example:
+
+“I’m dancing” → 💃
+
+“I’m eating pizza” → 🍕
+
+“Feeling happy” → 😊
+
+## 🧠 Only the emoji is inserted and sent.
+- No voice recording. No text. Pure emotion.
+
+## ✅ Key Features
+
+- 🎧 Real-time Offline Voice Recognition (via Vosk)
+
+- 🧠 Intent Understanding using BERT (HuggingFace Transformers)
+
+- 😄 Emoji Suggestion using Semantic Similarity
+
+- 🧩 Injected directly inside WhatsApp Web via Chrome Extension
+
+- 💬 Auto-sends emoji in chat (without typing)
+
+## 🛠️ Tech Stack 
+
+```
+| Component                | Tech Used                    | Role                                         |
+|--------------------------|------------------------------|----------------------------------------------|
+
+| 🎤 Speech Recognition    | Vosk                         | Converts microphone input into offline text  |
+
+| 🧠 NLP & Intent Matching | BERT (HuggingFace) + PyTorch | Understands user speech                      |
+
+| ➗ Similarity Matching   | NumPy                        | Matches text with emoji keywords             |
+
+| ⚙️ Backend                | FastAPI                      | `/listen` endpoint for voice analysis        |
+
+| 💬 Frontend              | Chrome Extension + JS        | Injects mic button and handles emoji display |
+
+```
+
+## 🧠 Architecture Flow
+```
+graph TD;
+    A[🎤 User Clicks Mic in WhatsApp] --> B[Mic Audio Recorded];
+    B --> C[Vosk: Speech-to-Text (Offline)];
+    C --> D[BERT Embedding];
+    D --> E[Cosine Similarity];
+    E --> F[Emoji Mapped 🎉];
+    F --> G[Emoji Inserted & Sent in WhatsApp];
+
+```
+## 🚀 Setup Instructions
+🔧 1. Clone the Repository
+```
+git clone https://github.com/rohitmishr/Speech-to-emoji.git
+
+cd Speech-to-emoji
+```
+🐍 2. Backend Setup (FastAPI + AI)
+```
+✅ Create Virtual Environment
+
+python3 -m venv emoji-ai-env
+
+source emoji-ai-env/bin/activate
+```
+```
+✅ Install Python Dependencies
+
+pip install -r requirements.txt
+```
+```
+✅ Download and Prepare Vosk Model
+
+curl -LO https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+
+unzip vosk-model-en-us-0.22.zip
+
+mkdir models
+
+mv vosk-model-en-us-0.22 models/
+```
+```
+✅ Run the FastAPI Server
+
+python run.py
+
+# Open in browser: http://localhost:8000
+
+```
+## 🧩 3. Chrome Extension Setup
+```
+✅ Navigate to Chrome Extensions:
+
+Visit: chrome://extensions/
+
+Enable: Developer Mode
+
+Click: “Load unpacked”
+
+Select the chrome-extension/ folder from this project.
+
+The extension will inject a 🎤 mic icon inside WhatsApp Web chat.
+```
+
+## 🎙️ How to Use
+```
+Open WhatsApp Web
+
+Go to any chat.
+
+Tap the green 🎤 mic icon next to your message box.
+
+Speak something like:
+
+“Let’s party” → 🎉
+
+“I love dogs” → 🐶
+
+“Flying to Paris” → ✈️
+
+The extension:
+
+Records short audio
+
+Sends it to the backend
+
+Receives emoji
+
+Injects emoji into chat
+
+Auto-clicks send ✅
+```
+
+## 📚 AI Tools Used:
+
+- 🔊 Vosk – Lightweight offline speech recognition
+
+- 🧠 BERT – Natural Language Understanding (via Transformers)
+
+- ➗ Cosine Similarity – Vector-based emoji matching
+
+- 🧩 JavaScript DOM Injection – Custom Chrome Extension logic
+
+## 🌍 Future Enhancements
+
+- 🌐 Multilingual support
+
+- 🔁 Emoji combos ("pizza and party" → 🍕🎉)
+
+- 📲 Integration with Telegram, Slack
+
+- 🤖 Add context-aware suggestions (e.g., "I'm tired" → 😴)
+
+- 🥳 Why It’s Cool
+```
+Platform	Feature
+WhatsApp	Voice Notes / Speech-to-Text
+This Project	Voice-to-Emoji (no text/voice)
+
+Talk less, express more.
+Let emojis speak for you. 💬 ➡️ 😄
+```
+
+
+
+## Result:
+- Tap to mic (Listening......)
+
 ![alt text](image.png)
 
 
+- Recognize Emoji
+![alt text](image-1.png)
 
+## 🤝 Contributing
+Feel free to fork, star ⭐, and open PRs.
 
-# Steps to install:
-- Clone this repo https://github.com/rohitmishr/Speech-to-emoji.git
-- Follow the A
-- create an env using ```python3 -m venv emoji-ai-env```
-- Activate the venv ``` source emoji-ai-env/bin/activate```
-- Run ```python3 run.py```
-### Note: If something fails please install the python packages
+This project is for expressive humans.
+Let's bring emotion back into messaging. 🫶
 
-
-### A: 
-- curl -L -o vosk-model-en-us-0.22.zip https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
-- unzip vosk-model-en-us-0.22.zip
-- move this vosk-model-en-us-0.22.zip unziped one inside models
-
-
-
-
-
-
-## 🧠 AI Tools & Technologies Used
-``` This project combines cutting-edge AI libraries for offline speech recognition and natural language understanding to suggest relevant emojis based on spoken phrases.
-
-🎤 Speech Recognition: Vosk
-Model: vosk-model-en-us-0.22
-
-Function: Converts spoken audio into text.
-
-Highlights:
-
-Lightweight and fully offline.
-
-Built on the Kaldi speech recognition toolkit.
-
-Supports real-time audio streaming.
-
-```
-
-## 🧠 Natural Language Understanding: Hugging Face Transformers
-Model: bert-base-uncased
-
-Function: Generates sentence embeddings to understand user intent.
-
-Highlights:
-
-Powered by BERT, a pre-trained transformer model.
-
-Captures contextual meaning of speech for semantic similarity.
-
-## ⚙️ Backend Intelligence: PyTorch
-Function: Executes the BERT model for embedding generation.
-
-Role: High-performance tensor computations for AI inference.
-
-➗ Semantic Matching: NumPy
-Function: Calculates cosine similarity between spoken text and emoji keyword embeddings.
-
-Purpose: Determines the most semantically relevant emoji.
-
-## 🚀 Web Framework: FastAPI
-Function: Serves as the backend web API.
-
-Features:
-
-Async support for speech streaming.
-
-Exposes REST endpoints like /listen for real-time interaction.
-
-## 💬 Frontend: Vanilla JavaScript + HTML
-Function: Captures user interaction via a microphone button and displays emoji suggestions.
-
-Features: Chat-like interface with real-time feedback.
-
-## ✅ Flow Overview
-
-graph TD;
-```    User[🎤 User Speaks] --> Vosk[Vosk: Speech-to-Text];
-    Vosk --> Text[📝 Recognized Text];
-    Text --> BERT[BERT: Generate Embedding];
-    BERT --> Match[🔍 Cosine Similarity with Emoji Keywords];
-    Match --> Emoji[😄 Suggested Emoji];
-    Emoji --> UI[🖥️ Display in Web Interface];
-
-```
-
-
-
-
-
-# Happy Coding 👨‍💻

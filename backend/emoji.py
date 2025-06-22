@@ -82,13 +82,14 @@ def get_emoji_for_text(text: str) -> str:
                 best_score = sim
                 best_emoji = emoji
 
-        return best_emoji if best_score > 0.3 else "❓"
+        # return best_emoji if best_score > 0.3 else "❓"
+        return best_emoji if best_score > 0.5 else "❓"
     except Exception as e:
         logger.error(f"Embedding error: {e}")
         return "❓"
 
 
-async def recognize_once(timeout=5.0, max_duration=10.0):
+async def recognize_once(timeout=5.0, max_duration=7.0):
     q = queue.Queue()
     rec = KaldiRecognizer(vosk_model, 16000)
 
@@ -173,11 +174,10 @@ html_page = """
             try {
                 const res = await fetch("/listen", { method: "POST" });
                 const data = await res.json();
-                if (data.text) {
-                    addMessage(data.text, "user");
-                    addMessage(data.emoji, "bot");
+               if (data.emoji && data.emoji !== "❓") {
+                    addMessage(data.emoji, "user");  // ✅ Show only emoji as user message
                 } else {
-                    addMessage("Couldn't hear you properly.", "bot");
+                    addMessage("🎧 Didn't catch an emoji-worthy phrase.", "bot");  // Optional fallback
                 }
             } catch (err) {
                 addMessage("Error: " + err.message, "bot");
