@@ -183,12 +183,16 @@ Let emojis speak for you. 💬 ➡️ 😄
 
 
 ## Result:
-- Tap to mic (Listening......)
+- Open whatsapp Web
+
+![alt text](image-2.png)
+
+- Tap to mic in chat section (Listening......)
 
 ![alt text](image.png)
 
 
-- Recognize Emoji
+- Recognize Emoji & send
 ![alt text](image-1.png)
 
 ## 🤝 Contributing
